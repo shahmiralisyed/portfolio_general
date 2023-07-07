@@ -3,7 +3,7 @@ import {AiFillEye, AiFillGithub} from 'react-icons/ai';
 import {motion} from 'framer-motion';
 import {client, urlFor } from '../../client';
 
-import { AppWrap } from '../../Wrapper';
+import { AppWrap, MotionWrap } from '../../Wrapper';
 
 import './Projects.scss';
 
@@ -112,4 +112,8 @@ const Projects = () => {
   )
 }
 
-export default AppWrap(Projects, 'projects')
+export default AppWrap(
+  MotionWrap(Projects, 'app__projects'), 
+  'projects',
+  'app__primarybg'
+)

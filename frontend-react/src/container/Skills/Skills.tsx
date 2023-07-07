@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Tooltip} from 'react-tooltip';
+import { Tooltip as ReactTooltip }  from 'react-tooltip';
 import {motion} from 'framer-motion';
 import {client, urlFor } from '../../client';
 
-import { AppWrap } from '../../Wrapper';
+import { AppWrap, MotionWrap } from '../../Wrapper';
 import './Skills.scss';
 import exp from 'constants';
 
@@ -54,27 +54,38 @@ const Skills = () => {
         </motion.div>
         <motion.div className='app__skills-exp'>
           {/* {console.log('here', experiences)} */}
-          {experiences?.map((experience) => (
-            
-            // <>
-              /* <motion.div
-                whileInView={{opacity:[0,1]}}
-                transition={{duration:.5}}
-                className='app__skills-exp-work'
-                data-tip
-                data-for={work.name}
-                key={work.name}
-              >
-                <h4 className='bold-text'>{work.name}</h4>
-                <p className='p-text'>{work.company}</p>
+          {experiences?.map((experience:any) => (
+            <motion.div
+              className='app__skills-exp-item'
+              key={experience.year}
+            >
+              <div className='app__skills-exp-year'>
+                <p className='bold-text'>{experience.year}</p>
+              </div>
+              <motion.div className='app__skills-exp-works'>
+                {experience.works.map((work:any) => (
+                  <>
+                    <motion.div
+                      whileInView={{opacity:[0,1]}}
+                      transition={{duration:.5}}
+                      className='app__skills-exp-work'
+                      // TODO make the tooltip work for the work
+                      key={work.name}
+                    >
+                      <h4 className='bold-text' >{work.name}</h4> 
+                      <p className='p-text'>{work.company}</p>
+                    </motion.div>
+                    <ReactTooltip
+                      anchorSelect={work.name}
+                      className='skills-tooltip'
+                    >
+                      {work.desc}
+                    </ReactTooltip>
+                  </>
+                ))}
               </motion.div>
-              <Tooltip
-                id={work.name}
-                effect="solid"
-                arrowColor="#fff"
-                className="skills-tooltip"
-              ></Tooltip> */
-            // </>
+
+            </motion.div>
           ))}
         </motion.div>
       </div>
@@ -82,4 +93,8 @@ const Skills = () => {
   )
 }
 
-export default AppWrap(Skills, 'skills');
+export default AppWrap(
+  MotionWrap(Skills, 'app__skills'), 
+  'skills',
+  'app__whitebg'
+)

@@ -5,7 +5,7 @@ interface navigationSelected{
 }
 
 const NavigationDots = ({active}: navigationSelected) => {
-    const navbarTabs = ['home', 'about', 'projects', 'contact', 'skills'];
+    const navbarTabs = ['home', 'about', 'projects', 'skills', 'contact'];
 
   return (
     <div className='app__navigation'>
