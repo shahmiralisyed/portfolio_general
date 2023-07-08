@@ -7,9 +7,12 @@ import './Testimonial.scss';
 import { AppWrap, MotionWrap } from '../../Wrapper';
 
 const Testimonial = () => {
-  const [brands, setBrands] = useState([]);
   const [testimonials, setTestimonials] = useState<{name:string; company:string; imageurl:string; feedback:string}[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const switchClick = (newIndex:number) => {
+    setCurrentIndex(newIndex);
+  }
 
   useEffect(() => {
       const testimonialQuery = '*[_type == "testimonials"]';
@@ -20,25 +23,32 @@ const Testimonial = () => {
 
     }, [])
 
+  const currTestimonial = testimonials[currentIndex];
+
   return (
     <>
-      <h2> Testimonials </h2>
+      <h2 className='head-text'> Testimonials </h2>
       {testimonials.length && (
         <>
-          {testimonials.map((testimonial) => (
-            <motion.div className='app__testimonial-item app__flex'
-              whileInView={{opacity:[0,1]}}
-              transition={{duration:.5}}
-              key={testimonial.name}
-            >
-              <img src={urlFor(testimonial.imageurl).url()} alt={testimonial.name}/>
+            <div className='app__testimonial-item app__flex'>
+              <img src={urlFor(currTestimonial.imageurl).url()} alt={currTestimonial.name}/>
               <div className='app__testimonial-content'>
-                <h4>{`${testimonial.name}, ${testimonial.company}`}</h4>
-                <p className='p-text'>{testimonial.feedback}</p>
+                <p className='p-text'>{currTestimonial.feedback}</p>
+                <div>
+                  <h4 className='bold-text'>{currTestimonial.name}</h4>
+                  <h3 className='p-text'>{currTestimonial.company}</h3>
+                </div>
               </div>
-            </motion.div>
-          ))}
-          
+            </div>
+
+            <div className='app__testimonial-btns app__flex'>
+              <div className='app__flex' onClick={() => switchClick(currentIndex === 0 ? testimonials.length - 1: currentIndex - 1)}>
+                <HiChevronLeft />
+              </div>
+              <div className='app__flex' onClick={() => switchClick(currentIndex === testimonials.length - 1 ? 0: currentIndex + 1)}>
+                <HiChevronRight />
+              </div>
+            </div>
           
         </>
       )}
