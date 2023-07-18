@@ -5,28 +5,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(224, 224, 224, 0.2);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(164, 164, 164, 0.11);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   position: fixed;
   z-index: 2;
-}
-
-.app__navbar-logo {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  img {
-    width: 90px;
-    height: 20px;
-
-    @media screen and (min-width: 2000px) {
-      width: 180px;
-      height: 40px;
-    }
-  }
 }
 
 .app__navbar-links {
@@ -36,38 +20,34 @@
   list-style: none;
 
   li {
-    margin: 0 1.5rem;
+    margin: 0 2rem;
     cursor: pointer;
 
     flex-direction: column;
 
     div {
-      width: 5px;
-      height: 5px;
       background: transparent;
-      border-radius: 50%;
+      border-radius: 15px;
+      padding: 0.3rem 0.6rem;
 
-      margin-bottom: 2px;
-    }
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
 
-    a {
-      color: var(--gray-color);
-      text-decoration: none;
-      flex-direction: column;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 0.9rem;
+        font-family: var(--font-base);
 
-      text-transform: uppercase;
-      font-weight: 500;
-
-      transition: all 0.4s ease-in-out;
-
-      &:hover {
-        color: var(--secondary-color);
+        transition: all 0.4s ease-in-out;
       }
     }
 
     &:hover {
       div {
-        background: var(--secondary-color);
+        a {
+          color: var(--highlight-color);
+        }
       }
     }
   }
@@ -91,7 +71,8 @@
   svg {
     width: 70%;
     height: 70%;
-    color: var(--white-color);
+    color: var(--background-color);
+    transform: scaleX(-1);
   }
 
   div {
@@ -120,7 +101,7 @@
     svg {
       width: 35px;
       height: 35px;
-      color: var(--secondary-color);
+      color: var(--background-color);
       margin: 0.5rem 1rem;
     }
 

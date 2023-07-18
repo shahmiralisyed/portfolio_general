@@ -1,19 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Header.scss';
-import {motion} from 'framer-motion';
+import {AnimatePresence, motion} from 'framer-motion';
 import {AppWrap} from '../../Wrapper';
 import {images} from '../../constants'
 
-const scaleVariants = {
-  whileInView: {scale: [0,1], 
-    opacity:[0,1], 
-    transition: {
-      duration:1, 
-      ease: 'easeInOut'
-    }}
-};
+
 
 const Header = () => {
+  const strings = ["Developer", "Designer", "Programmer"];
+  // the index of the current string in the rotating string animation
+  const [index, setIndex] = useState<number>(0);
+  // function that switches the index to the next one in the array
+  const nextString = () => {
+    // console.log('index is ', index);
+    (index === strings.length-1) ? setIndex(0): setIndex(index+1);
+    
+  };
+  // in each render run the function to switch the current string every 2 sec
+  useEffect(() => {
+    const timer = setInterval(nextString, 3000);
+    return () => clearInterval(timer);
+  });
+
   return (
     <div id='home' className='app__header app__flex'>
       <motion.div
@@ -21,45 +29,29 @@ const Header = () => {
       transition = {{duration:.7}}
       className='app__header-info'
       >
-        <div className='app__header-badge'>
-          <div className='badge-cmp app__flex'>
-            <span>👋</span>
-            <div style={{marginLeft: 20}}>
-              <p className='p-text'>Hello, I am</p>
-              <h1 className='head-text'>Shahmir</h1>
-            </div>
-          </div>
+        <h3>Hi, My Name is</h3>
+        <h1>Shahmir Ali Syed</h1>
+        <h3> 
+          I am a&nbsp;
+          <AnimatePresence>
+            <motion.span
+              key={index}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ ease: "easeInOut" }}
+              style={{ position: "absolute" }}
+            >
+                <span>{strings[index]}</span>
+            </motion.span>
+          </AnimatePresence>
+        </h3>
 
-          <div className='tag-cmp app__flex'>
-            <p className='p-text'>Full Stack Web Developer</p>
-          </div>
-        </div>
-      </motion.div>
-      <motion.div
-      whileInView={{opacity: [0, 1]}}
-      transition={{duration: 0.5, delayChildren: 0.5}}
-      className='app__header-img'
-      >
-        <img src={images.profile} alt='profile-bg'></img>
-        <motion.img
-        whileInView={{scale:[0,1]}}
-        transition={{duration: 1, ease: 'easeInOut'}}
-        src={images.circle}
-        alt='profile_circle'
-        className='overlay_circle'
-        >
-        </motion.img>
-      </motion.div>
-      <motion.div
-        variants={scaleVariants}
-        whileInView={scaleVariants.whileInView}
-        className='app__header-circles'
-      >
-        {[images.flutter, images.redux, images.sass].map((circle, index) => (
-          <div className='circle-cmp app__flex' key={`circle-${index}`}>
-            <img src={circle} alt='circle'></img>
-          </div>
-        ))}
+        <p>
+          I am a software developer who enjoys creating and designing visual experiences 
+          <br/>
+        </p>
+
       </motion.div>
     </div>
   )
