@@ -11,6 +11,10 @@
   background-color: var(--background-color);
 }
 
+.app__primaryaltbg {
+  background-color: #18223c;
+}
+
 .app__container {
   width: 100%;
   min-height: 100vh;
@@ -52,18 +56,21 @@
 }
 
 .head-text {
-  font-size: 2.75rem;
-  font-weight: 800;
-  text-align: center;
-  color: var(--black-color);
-  text-transform: capitalize;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-family: var(--font-base);
 
   span {
     color: var(--secondary-color);
   }
 
   @media screen and (min-width: 2000px) {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   @media screen and (max-width: 450px) {

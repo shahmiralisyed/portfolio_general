@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import './Header.scss';
-import {AnimatePresence, motion} from 'framer-motion';
+import { motion} from 'framer-motion';
 import {AppWrap} from '../../Wrapper';
 import {images} from '../../constants'
 
 
 
 const Header = () => {
-  const strings = ["Developer", "Designer", "Programmer"];
+  const strings = ["Creative Soul", "Developer", "Designer", "Programmer"];
   // the index of the current string in the rotating string animation
   const [index, setIndex] = useState<number>(0);
   // function that switches the index to the next one in the array
@@ -32,8 +32,8 @@ const Header = () => {
         <h3>Hi, My Name is</h3>
         <h1>Shahmir Ali Syed</h1>
         <h3> 
-          I am a&nbsp;
-          <AnimatePresence>
+          A&nbsp;
+          
             <motion.span
               key={index}
               initial={{ y: 20, opacity: 0 }}
@@ -44,13 +44,15 @@ const Header = () => {
             >
                 <span>{strings[index]}</span>
             </motion.span>
-          </AnimatePresence>
+          
         </h3>
 
         <p>
-          I am a software developer who enjoys creating and designing visual experiences 
-          <br/>
+          I am a software developer who enjoys crafting visual experiences <br/>through a variety of tools. 
+          
         </p>
+
+        <h3>Innovating Digital Dreams, One Line at a Time</h3>
 
       </motion.div>
     </div>

@@ -39,8 +39,8 @@ const Projects = () => {
   return (
     <>
       <h2 className='head-text'>
-        Here are my
-        <span> Projects</span>
+         A Preview Of&nbsp;
+        <span>My Projects</span>
       </h2>
 
       <div className='app__projects-filter'>
